@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from enum import Enum, auto
 from typing import Any
 
@@ -50,11 +52,11 @@ class Note(Enum):
     }
 
     @classmethod
-    def from_str(cls, note_str: str) -> Any:
+    def from_str(cls, note_str: str) -> Note:
         return Note(cls.__str_to_note[note_str])
 
     @classmethod
-    def choices(cls):
+    def choices(cls) -> list[str]:
         return cls.__str_to_note.keys()
 
 
@@ -84,7 +86,7 @@ class Scale(Enum):
     }
 
     @classmethod
-    def from_str(cls, scale_str: str) -> Any:
+    def from_str(cls, scale_str: str) -> Scale:
         return Scale(cls.__str_to_scale[scale_str])
 
     __interval_to_degree = {
@@ -107,5 +109,5 @@ class Scale(Enum):
         return cls.__interval_to_degree[interval]
 
     @classmethod
-    def choices(cls):
+    def choices(cls) -> list[str]:
         return cls.__str_to_scale.keys()

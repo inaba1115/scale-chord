@@ -1,15 +1,24 @@
+from __future__ import annotations
+
 import model as m
 
 
 class ResultScale:
-    def __init__(self, key_note, scale, scale_degrees, scale_notes, diatonic_chords):
+    def __init__(
+        self,
+        key_note: m.Note,
+        scale: m.Scale,
+        scale_degrees: list[str],
+        scale_notes: list[m.Note],
+        diatonic_chords: list[ResultChord],
+    ) -> None:
         self.key_note = key_note
         self.scale = scale
         self.scale_degrees = scale_degrees
         self.scale_notes = scale_notes
         self.diatonic_chords = diatonic_chords
 
-    def pprint(self):
+    def pprint(self) -> None:
         print("key: {}".format(self.key_note))
         print("scale: {}".format(self.scale))
         print("scale_degrees: {}".format(self.scale_degrees))
@@ -24,15 +33,15 @@ class ResultScale:
 
 
 class ResultChord:
-    def __init__(self, root, degrees, notes) -> None:
+    def __init__(self, root: m.Note, degrees: list[str], notes: list[m.Note]) -> None:
         self.root = root
         self.degrees = degrees
         self.notes = notes
 
-    def str_width(self):
+    def str_width(self) -> tuple[int, int]:
         return len(str(self.root)), len(str(self.degrees))
 
-    def pprint(self, w0, w1):
+    def pprint(self, w0, w1) -> None:
         degrees = str(self.degrees)
         notes = str([str(x) for x in self.notes])
         print("{:{}}".format(self.root, w0), end="")
@@ -40,7 +49,7 @@ class ResultChord:
         print("{}".format(notes))
 
 
-def get_chord(shifted_intervals: list[int], idx: int):
+def get_chord(shifted_intervals: list[int], idx: int) -> ResultChord:
     root_interval = shifted_intervals[idx]
     root = m.Note(root_interval % 12)
 
@@ -55,7 +64,7 @@ def get_chord(shifted_intervals: list[int], idx: int):
     return ResultChord(root, degrees, notes)
 
 
-def get_scale(key_note: m.Note, scale: m.Scale):
+def get_scale(key_note: m.Note, scale: m.Scale) -> ResultScale:
     scale_degrees = [m.Scale.interval_to_degree(x) for x in scale.to_intervals()]
     scale_notes = [m.Note((x + key_note.value) % 12) for x in scale.to_intervals()]
 
