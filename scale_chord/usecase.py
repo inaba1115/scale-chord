@@ -23,13 +23,29 @@ class ResultScale:
         print("scale: {}".format(self.scale))
         print("scale_degrees: {}".format(self.scale_degrees))
         print("scale_notes: {}".format([str(x) for x in self.scale_notes]))
+
         print("--------")
+
         w0, w1 = 0, 0
         for c in self.diatonic_chords:
             w2, w3 = c.str_width()
             w0, w1 = max(w0, w2), max(w1, w3)
         for c in self.diatonic_chords:
             c.pprint(w0 + 1, w1 + 1)
+
+        print("--------")
+
+        strings = [6, 5, 4, 3, 2, 1]
+        string_data_list = {}
+        for idx in strings:
+            string_data_list[idx] = m.Guitar.get_string_data(
+                idx, self.key_note, self.scale_notes
+            )
+
+        for flet in range(13):
+            for idx in strings:
+                print("|{:8}".format(string_data_list[idx][flet]), end="")
+            print("|")
 
 
 class ResultChord:

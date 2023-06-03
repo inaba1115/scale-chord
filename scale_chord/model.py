@@ -18,6 +18,9 @@ class Note(Enum):
     AsBb = auto()
     B = auto()
 
+    def next(self) -> Note:
+        return Note((self.value + 1) % 12)
+
     __note_to_str = {
         C: "C",
         CsDb: "C#/Db",
@@ -111,3 +114,30 @@ class Scale(Enum):
     @classmethod
     def choices(cls) -> list[str]:
         return cls.__str_to_scale.keys()
+
+
+class Guitar:
+    __tuning = {
+        6: Note.E,
+        5: Note.A,
+        4: Note.D,
+        3: Note.G,
+        2: Note.B,
+        1: Note.E,
+    }
+
+    @classmethod
+    def get_string_data(
+        cls, string_idx: int, key_note: Note, scale_notes: list[Note]
+    ) -> list[str]:
+        x = cls.__tuning[string_idx]
+        ret = []
+        for flet in range(13):
+            if x is key_note:
+                ret.append("[{}]".format(str(x)))
+            elif x in scale_notes:
+                ret.append(str(x))
+            else:
+                ret.append(".")
+            x = x.next()
+        return ret
