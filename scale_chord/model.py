@@ -114,7 +114,7 @@ class Scale(Enum):
     @classmethod
     def choices(cls) -> list[str]:
         return cls.__str_to_scale.keys()
-    
+
     __degree_to_interval = {
         "1": 0,
         "b2": 1,
