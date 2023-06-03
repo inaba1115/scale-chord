@@ -114,3 +114,26 @@ class Scale(Enum):
     @classmethod
     def choices(cls) -> list[str]:
         return cls.__str_to_scale.keys()
+    
+    __degree_to_interval = {
+        "1": 0,
+        "b2": 1,
+        "2": 2,
+        "b3": 3,
+        "3": 4,
+        "4": 5,
+        "#4": 6,
+        "5": 7,
+        "b6": 8,
+        "6": 9,
+        "b7": 10,
+        "7": 11,
+    }
+
+    @classmethod
+    def degree_to_interval(cls, degree: str) -> int:
+        return cls.__degree_to_interval[degree]
+
+    @classmethod
+    def choices_degree(cls) -> list[str]:
+        return cls.__degree_to_interval.keys()

@@ -40,3 +40,9 @@ class Guitar:
             for nth in strings:
                 print("|{:8}".format(fingerboard[nth][flet]), end="")
             print("|")
+
+
+def get_scale_notes(key_note: m.Note, degrees: list[str]) -> list[m.Note]:
+    intervals = [m.Scale.degree_to_interval(x) for x in degrees]
+    scale_notes = [m.Note((x + key_note.value) % 12) for x in intervals]
+    return scale_notes
