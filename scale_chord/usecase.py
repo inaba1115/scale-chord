@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import guitar as g
 import model as m
 
 
@@ -35,18 +36,7 @@ class ResultScale:
 
         print("--------")
 
-        strings = [6, 5, 4, 3, 2, 1]
-        range_ = 16
-        string_data_list = {}
-        for idx in strings:
-            string_data_list[idx] = m.Guitar.get_string_data(
-                idx, range_, self.key_note, self.scale_notes
-            )
-
-        for flet in range(range_):
-            for idx in strings:
-                print("|{:8}".format(string_data_list[idx][flet]), end="")
-            print("|")
+        g.Guitar.pprint(self.key_note, self.scale_notes, 15)
 
 
 class ResultChord:
