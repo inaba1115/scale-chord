@@ -128,11 +128,11 @@ class Guitar:
 
     @classmethod
     def get_string_data(
-        cls, string_idx: int, key_note: Note, scale_notes: list[Note]
+        cls, string_idx: int, range_: int, key_note: Note, scale_notes: list[Note]
     ) -> list[str]:
         x = cls.__tuning[string_idx]
         ret = []
-        for flet in range(13):
+        for flet in range(range_):
             if x is key_note:
                 ret.append("[{}]".format(str(x)))
             elif x in scale_notes:
