@@ -33,7 +33,7 @@ class Note(Enum):
 
     def __str__(self) -> str:
         return Note.__note_to_str[self.value]
-    
+
     __str_to_note = {
         "C": C,
         "C#/Db": CsDb,
@@ -51,7 +51,11 @@ class Note(Enum):
 
     @classmethod
     def from_str(cls, note_str: str) -> Any:
-        return cls.__str_to_note[note_str]
+        return Note(cls.__str_to_note[note_str])
+
+    @classmethod
+    def choices(cls):
+        return cls.__str_to_note.keys()
 
 
 class Scale(Enum):
@@ -73,7 +77,16 @@ class Scale(Enum):
 
     def to_intervals(self) -> list[int]:
         return Scale.__scale_to_intervals[self.value]
-    
+
+    __str_to_scale = {
+        "major": Major,
+        "minor": Minor,
+    }
+
+    @classmethod
+    def from_str(cls, scale_str: str) -> Any:
+        return Scale(cls.__str_to_scale[scale_str])
+
     __interval_to_degree = {
         0: "1",
         1: "b2",
@@ -92,3 +105,7 @@ class Scale(Enum):
     @classmethod
     def interval_to_degree(cls, interval: int) -> str:
         return cls.__interval_to_degree[interval]
+
+    @classmethod
+    def choices(cls):
+        return cls.__str_to_scale.keys()

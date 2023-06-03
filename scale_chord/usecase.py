@@ -20,7 +20,7 @@ class ResultScale:
             w2, w3 = c.str_width()
             w0, w1 = max(w0, w2), max(w1, w3)
         for c in self.diatonic_chords:
-            c.pprint(w0+1, w1+1)
+            c.pprint(w0 + 1, w1 + 1)
 
 
 class ResultChord:
@@ -42,12 +42,14 @@ class ResultChord:
 
 def get_chord(shifted_intervals: list[int], idx: int):
     root_interval = shifted_intervals[idx]
-    root = m.Note(root_interval%12)
+    root = m.Note(root_interval % 12)
 
-    rotated_intervals = shifted_intervals[idx:] + [x+12 for x in shifted_intervals[:idx]]
-    notes = [m.Note(x%12) for x in rotated_intervals]
+    rotated_intervals = shifted_intervals[idx:] + [
+        x + 12 for x in shifted_intervals[:idx]
+    ]
+    notes = [m.Note(x % 12) for x in rotated_intervals]
 
-    intervals_from_root = [x-root_interval for x in rotated_intervals]
+    intervals_from_root = [x - root_interval for x in rotated_intervals]
     degrees = [m.Scale.interval_to_degree(y) for y in intervals_from_root]
 
     return ResultChord(root, degrees, notes)
@@ -55,15 +57,11 @@ def get_chord(shifted_intervals: list[int], idx: int):
 
 def get_scale(key_note: m.Note, scale: m.Scale):
     scale_degrees = [m.Scale.interval_to_degree(x) for x in scale.to_intervals()]
-    scale_notes = [m.Note((x+key_note.value)%12) for x in scale.to_intervals()]
+    scale_notes = [m.Note((x + key_note.value) % 12) for x in scale.to_intervals()]
 
-    shifted_intervals = [x+key_note.value for x in scale.to_intervals()]
+    shifted_intervals = [x + key_note.value for x in scale.to_intervals()]
     diatonic_chords = []
     for idx in range(len(shifted_intervals)):
         diatonic_chords.append(get_chord(shifted_intervals, idx))
 
     return ResultScale(key_note, scale, scale_degrees, scale_notes, diatonic_chords)
-
-
-result = get_scale(m.Note.AsBb, m.Scale.Minor)
-result.pprint()
