@@ -27,8 +27,18 @@ class Result:
         x2 = [str(x) for x in self.x2]
         x3 = [str(x) for x in self.x3]
         x4 = [str(x) for x in self.x4]
-        print("a: {} {} {}".format(self.a_key_note, self.a_degrees, a_scale_notes))
-        print("b: {} {} {}".format(self.b_key_note, self.b_degrees, b_scale_notes))
+
+        w0 = max(len(str(self.a_key_note)), len(str(self.b_key_note))) + 1
+        w1 = max(len(str(self.a_degrees)), len(str(self.b_degrees))) + 1
+
+        print("a: ", end="")
+        print("{:{}}".format(self.a_key_note, w0), end="")
+        print("{:{}}".format(str(self.a_degrees), w1), end="")
+        print("{}".format(a_scale_notes))
+        print("b: ", end="")
+        print("{:{}}".format(self.b_key_note, w0), end="")
+        print("{:{}}".format(str(self.b_degrees), w1), end="")
+        print("{}".format(b_scale_notes))
         print("a & b: {}".format(x0))
         print("a | b: {}".format(x1))
         print("a ^ b: {}".format(x2))
