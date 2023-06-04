@@ -62,6 +62,9 @@ class Note(Enum):
     def choices(cls) -> list[str]:
         return cls.__str_to_note.keys()
 
+    def __lt__(self, other: Note) -> bool:
+        return self.value < other.value
+
 
 class Scale(Enum):
     Major = auto()
