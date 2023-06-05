@@ -31,13 +31,13 @@ class Guitar:
 
     @classmethod
     def pprint(cls, key_note: m.Note, scale_notes: list[m.Note], max_flet: int) -> None:
-        strings = [6, 5, 4, 3, 2, 1]
+        strings = [1, 2, 3, 4, 5, 6]
         fingerboard = {}
         for nth in strings:
             fingerboard[nth] = cls.__nth_string(nth, key_note, scale_notes, max_flet)
 
-        for flet in range(max_flet + 1):
-            for nth in strings:
+        for nth in strings:
+            for flet in range(max_flet + 1):
                 print("|{:8}".format(fingerboard[nth][flet]), end="")
             print("|")
 
