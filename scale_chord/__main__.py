@@ -1,8 +1,8 @@
 import argparse
 
-import logic as l
-import model as m
-import scale as s
+import scale_chord.logic as l
+import scale_chord.model as m
+import scale_chord.scale as s
 
 
 def cmd_scale(args):

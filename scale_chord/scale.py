@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-import guitar_viewer as g
-import model as m
+import scale_chord.guitar_viewer as g
+import scale_chord.model as m
 
 
 @dataclass

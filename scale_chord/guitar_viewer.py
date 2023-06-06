@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import model as m
+import scale_chord.model as m
 
 
 class GuitarViewer:
