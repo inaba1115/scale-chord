@@ -3,8 +3,8 @@ from __future__ import annotations
 import model as m
 
 
-class Guitar:
-    __tuning = {
+class GuitarViewer:
+    __TUNING = {
         6: m.Note.E,
         5: m.Note.A,
         4: m.Note.D,
@@ -17,7 +17,7 @@ class Guitar:
     def __nth_string(
         cls, nth: int, key_note: m.Note, scale_notes: list[m.Note], max_flet: int
     ) -> list[str]:
-        x = cls.__tuning[nth]
+        x = cls.__TUNING[nth]
         ret = []
         for flet in range(max_flet + 1):
             if x is key_note:
@@ -40,9 +40,3 @@ class Guitar:
             for flet in range(max_flet + 1):
                 print("|{:8}".format(fingerboard[nth][flet]), end="")
             print("|")
-
-
-def get_scale_notes(key_note: m.Note, degrees: list[str]) -> list[m.Note]:
-    intervals = [m.Scale.degree_to_interval(x) for x in degrees]
-    scale_notes = [m.Note((x + key_note.value) % 12) for x in intervals]
-    return scale_notes

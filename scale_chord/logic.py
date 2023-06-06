@@ -46,17 +46,14 @@ class Result:
         print("b - a: {}".format(x4))
 
 
-def get_logic(
+def do_logic(
     a_key_note: m.Note, a_degrees: list[str], b_key_note: m.Note, b_degrees: list[str]
 ) -> list[m.Note]:
-    a_intervals = [m.Scale.degree_to_interval(x) for x in a_degrees]
-    a_scale_notes = [m.Note((x + a_key_note.value) % 12) for x in a_intervals]
+    a_scale = m.Scale.gen_scale(a_key_note, a_degrees)
+    b_scale = m.Scale.gen_scale(b_key_note, b_degrees)
 
-    b_intervals = [m.Scale.degree_to_interval(x) for x in b_degrees]
-    b_scale_notes = [m.Note((x + b_key_note.value) % 12) for x in b_intervals]
-
-    a = set(a_scale_notes)
-    b = set(b_scale_notes)
+    a = set(a_scale)
+    b = set(b_scale)
 
     x0 = sorted(list(a & b))
     x1 = sorted(list(a | b))
@@ -67,10 +64,10 @@ def get_logic(
     return Result(
         a_key_note,
         a_degrees,
-        a_scale_notes,
+        a_scale,
         b_key_note,
         b_degrees,
-        b_scale_notes,
+        b_scale,
         x0,
         x1,
         x2,

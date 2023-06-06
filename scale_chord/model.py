@@ -17,28 +17,7 @@ class Note(Enum):
     AsBb = auto()
     B = auto()
 
-    def next(self) -> Note:
-        return Note((self.value + 1) % 12)
-
-    __note_to_str = {
-        C: "C",
-        CsDb: "C#/Db",
-        D: "D",
-        DsEb: "D#/Eb",
-        E: "E",
-        F: "F",
-        FsGb: "F#/Gb",
-        G: "G",
-        GsAb: "G#/Ab",
-        A: "A",
-        AsBb: "A#/Bb",
-        B: "B",
-    }
-
-    def __str__(self) -> str:
-        return Note.__note_to_str[self.value]
-
-    __str_to_note = {
+    __STR_TO_NOTE = {
         "C": C,
         "C#/Db": CsDb,
         "D": D,
@@ -53,48 +32,41 @@ class Note(Enum):
         "B": B,
     }
 
+    __NOTE_TO_STR = {
+        C: "C",
+        CsDb: "C#/Db",
+        D: "D",
+        DsEb: "D#/Eb",
+        E: "E",
+        F: "F",
+        FsGb: "F#/Gb",
+        G: "G",
+        GsAb: "G#/Ab",
+        A: "A",
+        AsBb: "A#/Bb",
+        B: "B",
+    }
+
     @classmethod
     def from_str(cls, note_str: str) -> Note:
-        return Note(cls.__str_to_note[note_str])
+        return Note(cls.__STR_TO_NOTE[note_str])
 
     @classmethod
     def choices(cls) -> list[str]:
-        return cls.__str_to_note.keys()
+        return cls.__STR_TO_NOTE.keys()
+
+    def __str__(self) -> str:
+        return Note.__NOTE_TO_STR[self.value]
 
     def __lt__(self, other: Note) -> bool:
         return self.value < other.value
 
+    def next(self) -> Note:
+        return Note((self.value + 1) % 12)
 
-class Scale(Enum):
-    Major = auto()
-    Minor = auto()
 
-    __scale_to_str = {
-        Major: "major",
-        Minor: "minor",
-    }
-
-    def __str__(self) -> str:
-        return Scale.__scale_to_str[self.value]
-
-    __scale_to_intervals = {
-        Major: [0, 2, 4, 5, 7, 9, 11],
-        Minor: [0, 2, 3, 5, 7, 8, 10],
-    }
-
-    def to_intervals(self) -> list[int]:
-        return Scale.__scale_to_intervals[self.value]
-
-    __str_to_scale = {
-        "major": Major,
-        "minor": Minor,
-    }
-
-    @classmethod
-    def from_str(cls, scale_str: str) -> Scale:
-        return Scale(cls.__str_to_scale[scale_str])
-
-    __interval_to_degree = {
+class Degree:
+    __INTERVAL_TO_DEGREE = {
         0: "1",
         1: "b2",
         2: "2",
@@ -109,15 +81,7 @@ class Scale(Enum):
         11: "7",
     }
 
-    @classmethod
-    def interval_to_degree(cls, interval: int) -> str:
-        return cls.__interval_to_degree[interval]
-
-    @classmethod
-    def choices(cls) -> list[str]:
-        return cls.__str_to_scale.keys()
-
-    __degree_to_interval = {
+    __DEGREE_TO_INTERVAL = {
         "1": 0,
         "b2": 1,
         "2": 2,
@@ -133,9 +97,42 @@ class Scale(Enum):
     }
 
     @classmethod
-    def degree_to_interval(cls, degree: str) -> int:
-        return cls.__degree_to_interval[degree]
+    def interval_to_degree(cls, interval: int) -> str:
+        return cls.__INTERVAL_TO_DEGREE[interval]
 
     @classmethod
-    def choices_degree(cls) -> list[str]:
-        return cls.__degree_to_interval.keys()
+    def degree_to_interval(cls, degree: str) -> int:
+        return cls.__DEGREE_TO_INTERVAL[degree]
+
+    @classmethod
+    def choices(cls) -> list[str]:
+        return cls.__DEGREE_TO_INTERVAL.keys()
+
+
+class Scale:
+    @classmethod
+    def gen_scale(cls, key_note: Note, degrees: list[str]) -> list[Note]:
+        intervals = [Degree.degree_to_interval(x) for x in degrees]
+        scale = [Note((x + key_note.value) % 12) for x in intervals]
+        return scale
+
+
+class Chord:
+    @classmethod
+    def gen_chord(
+        cls, key_note: Note, degrees: list[str], idx: int
+    ) -> tuple(Note, list[str], list[Note]):
+        intervals = [Degree.degree_to_interval(x) for x in degrees]
+        shifted_intervals = [x + key_note.value for x in intervals]
+
+        root_interval = shifted_intervals[idx]
+        rotated_intervals = shifted_intervals[idx:] + [
+            x + 12 for x in shifted_intervals[:idx]
+        ]
+
+        chord_intervals = [x - root_interval for x in rotated_intervals]
+        chord_degrees = [Degree.interval_to_degree(y) for y in chord_intervals]
+        chord_notes = [Note(x % 12) for x in rotated_intervals]
+        chord_root = chord_notes[0]
+
+        return chord_root, chord_degrees, chord_notes
