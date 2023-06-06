@@ -13,6 +13,13 @@ def cmd_scale(args):
     result.pprint()
 
 
+def cmd_scale2(args):
+    key_note = m.Note.from_str(args.key)
+    degrees = args.degrees.split(",")
+    result = u.get_scale2(key_note, degrees)
+    result.pprint()
+
+
 def cmd_guitar(args):
     root_note = m.Note.from_str(args.root)
     degrees = args.degrees.split(",")
@@ -37,6 +44,11 @@ parser_scale = subparser.add_parser("scale")
 parser_scale.add_argument("--key", default="C", choices=m.Note.choices())
 parser_scale.add_argument("--scale", default="minor", choices=m.Scale.choices())
 parser_scale.set_defaults(func=cmd_scale)
+
+parser_scale = subparser.add_parser("scale2")
+parser_scale.add_argument("--key", default="C", choices=m.Note.choices())
+parser_scale.add_argument("--degrees", default="1,b3,5")  # TODO: choices
+parser_scale.set_defaults(func=cmd_scale2)
 
 parser_guitar = subparser.add_parser("guitar")
 parser_guitar.add_argument("--root", default="C", choices=m.Note.choices())

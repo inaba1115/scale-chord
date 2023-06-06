@@ -81,3 +81,16 @@ def get_scale(key_note: m.Note, scale: m.Scale) -> ResultScale:
         diatonic_chords.append(get_chord(shifted_intervals, idx))
 
     return ResultScale(key_note, scale, scale_degrees, scale_notes, diatonic_chords)
+
+
+def get_scale2(key_note: m.Note, degrees: list[str]) -> ResultScale:
+    intervals = [m.Scale.degree_to_interval(x) for x in degrees]
+
+    scale_notes = [m.Note((x + key_note.value) % 12) for x in intervals]
+
+    shifted_intervals = [x + key_note.value for x in intervals]
+    diatonic_chords = []
+    for idx in range(len(shifted_intervals)):
+        diatonic_chords.append(get_chord(shifted_intervals, idx))
+
+    return ResultScale(key_note, "null", degrees, scale_notes, diatonic_chords)
