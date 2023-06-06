@@ -31,6 +31,7 @@ def cmd_logic(args):
 
 parser = argparse.ArgumentParser()
 subparser = parser.add_subparsers()
+subparser.required = True
 
 parser_scale = subparser.add_parser("scale")
 parser_scale.add_argument("--key", default="C", choices=m.Note.choices())
