@@ -25,7 +25,12 @@ class GuitarViewer:
             elif x in scale_notes:
                 ret.append(str(x))
             else:
-                ret.append(".")
+                if flet in [0, 12]:
+                    ret.append("..")
+                elif flet in [3, 5, 7, 15]:
+                    ret.append(".")
+                else:
+                    ret.append("")
             x = x.next()
         return ret
 
