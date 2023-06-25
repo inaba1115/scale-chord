@@ -21,16 +21,11 @@ class GuitarViewer:
         ret = []
         for flet in range(max_flet + 1):
             if x is key_note:
-                ret.append("[{}]".format(str(x)))
+                ret.append("[{}]".format(x))
             elif x in scale_notes:
-                ret.append(str(x))
+                ret.append("({})".format(x))
             else:
-                if flet in [0, 12]:
-                    ret.append("..")
-                elif flet in [3, 5, 7, 15]:
-                    ret.append(".")
-                else:
-                    ret.append("")
+                ret.append("{}".format(flet))
             x = x.next()
         return ret
 
