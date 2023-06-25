@@ -17,12 +17,12 @@ F     ['1', 'b2', 'b3', '4', '5', 'b6', 'b7']  ['F', 'F#/Gb', 'G#/Ab', 'A#/Bb', 
 F#/Gb ['1', '2', '3', '#4', '5', '6', '7']     ['F#/Gb', 'G#/Ab', 'A#/Bb', 'C', 'C#/Db', 'D#/Eb', 'F']
 G#/Ab ['1', '2', '3', '4', '5', '6', 'b7']     ['G#/Ab', 'A#/Bb', 'C', 'C#/Db', 'D#/Eb', 'F', 'F#/Gb']
 --------
-|.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |.       |
-|.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |.       |
-|.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |
-|.       |D#/Eb   |.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |
-|.       |[A#/Bb] |.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |
-|.       |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |.       |
+|..      |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |        |D#/Eb   |..      |F       |F#/Gb   |.       |
+|..      |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |        |G#/Ab   |        |[A#/Bb] |..      |C       |C#/Db   |.       |
+|..      |G#/Ab   |        |[A#/Bb] |        |C       |C#/Db   |.       |D#/Eb   |        |F       |F#/Gb   |..      |G#/Ab   |        |[A#/Bb] |
+|..      |D#/Eb   |        |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |        |C       |C#/Db   |..      |D#/Eb   |        |F       |
+|..      |[A#/Bb] |        |C       |C#/Db   |.       |D#/Eb   |.       |F       |F#/Gb   |        |G#/Ab   |..      |[A#/Bb] |        |C       |
+|..      |F       |F#/Gb   |.       |G#/Ab   |.       |[A#/Bb] |.       |C       |C#/Db   |        |D#/Eb   |..      |F       |F#/Gb   |.       |
 ```
 
 logic
